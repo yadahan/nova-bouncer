@@ -1,0 +1,38 @@
+{
+    "name": "yadahan/nova-bouncer",
+    "description": "A Laravel Nova tool for managing Bouncer roles and abilities.",
+    "keywords": [
+        "laravel",
+        "nova",
+        "bouncer"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yaakov Dahan",
+            "email": "yakidehan@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "laravel/nova": "*",
+        "silber/bouncer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yadahan\\BouncerTool\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yadahan\\BouncerTool\\BouncerToolServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
