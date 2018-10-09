@@ -18,16 +18,9 @@ You may use Composer to install Nova Bouncer into your Laravel project:
 
 ### Configuration
 
-After installing the Nova Bouncer, publish its config using the `vendor:publish` Artisan command:
-
-    php artisan vendor:publish --provider="Yadahan\BouncerTool\BouncerToolServiceProvider"
-
-Next, you need to register the tool with Nova. This is typically done in the tools method of the NovaServiceProvider:
+After installing the Nova Bouncer, you need to register the tool with Nova in `app/Providers/NovaServiceProvder.php` file:
 
 ```php
-// in app/Providers/NovaServiceProvder.php
-
-// ...
 public function tools()
 {
     return [
@@ -37,12 +30,9 @@ public function tools()
 }
 ```
 
-Finally, add the Roles and Abilities `MorphToMany` fields to your User resource:
+Next, add the Roles and Abilities `MorphToMany` fields to your User resource in `app/Nova/User.php` file:
 
 ```php
-// in app/Nova/User.php
-
-// ...
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\MorphToMany;
 
@@ -62,6 +52,30 @@ public function fields(Request $request)
             ->fields(new \Yadahan\BouncerTool\Nova\PermissionsFields),
     ];
 }
+```
+
+Finally, publish the Nova Bouncer config using the `vendor:publish` Artisan command:
+
+    php artisan vendor:publish --provider="Yadahan\BouncerTool\BouncerToolServiceProvider"
+
+After publishing the config, you may define the models and abilities that you want to manage, in `config/bouncer-tool.php` file:
+
+```php
+'entities' => [
+    '*' => 'Everything',
+    'App\User' => 'User',
+],
+
+'actions' => [
+    '*' => 'All abilities',
+    'viewAny' => 'View any',
+    'view' => 'View',
+    'create' => 'Create',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'restore' => 'Restore',
+    'forceDelete' => 'Force delete',
+],
 ```
 
 ### Basic Usage
