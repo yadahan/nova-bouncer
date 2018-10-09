@@ -64,11 +64,10 @@ class Ability extends Resource
                 ->displayUsingLabels(),
 
             Select::make('Entity Type')
-                ->hideFromIndex()
                 ->options(config('bouncer-tool.entities'))
                 ->displayUsingLabels(),
 
-            Text::make('Entity ID')->hideFromIndex(),
+            Text::make('Entity ID'),
 
             Boolean::make('Only Owned'),
 
@@ -101,7 +100,9 @@ class Ability extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new Filters\Action,
+        ];
     }
 
     /**

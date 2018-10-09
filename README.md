@@ -1,11 +1,20 @@
 # Nova Bouncer
 
 [![StyleCI](https://styleci.io/repos/152144400/shield?branch=master&style=flat)](https://styleci.io/repos/152144400)
+[![Total Downloads](https://poser.pugx.org/yadahan/nova-bouncer/downloads?format=flat)](https://packagist.org/packages/yadahan/nova-bouncer)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/LICENSE)
 
 Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your Nova application.
 
 ![nova bouncer screenshot](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/screenshot.png)
+
+## Installation
+
+> Nova Bouncer requires silber/bouncer.
+
+You may use Composer to install Nova Bouncer into your Laravel project:
+
+    composer require yadahan/nova-bouncer dev-master
 
 ### Configuration
 
@@ -35,7 +44,6 @@ Finally, add the Roles and Abilities `MorphToMany` fields to your User resource:
 
 // ...
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\MorphToMany;
 
 public function fields(Request $request)
