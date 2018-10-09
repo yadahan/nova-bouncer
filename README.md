@@ -64,6 +64,33 @@ public function fields(Request $request)
 }
 ```
 
+### Basic Usage
+
+A new item group (Bouncer) will appear in your Nova navigation menu.
+
+> Only users who are authorized to manage the Bouncer models can see this navigation items.
+
+You may give ability to manage the Bouncer models for a user\role:
+
+```php
+$user = User::find(1);
+
+Bouncer::allow($user)->toManage(\Silber\Bouncer\Database\Role::class);
+Bouncer::allow($user)->toManage(\Silber\Bouncer\Database\Ability::class);
+
+// or
+
+Bouncer::role()->create([
+    'name' => 'manage-bouncer',
+    'title' => 'Manage bouncer',
+]);
+
+Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Role::class);
+Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Ability::class);
+
+$user->assign('manage-bouncer');
+```
+
 ## Laravel Authorization
 
 [https://laravel.com/docs/authorization#creating-policies](https://laravel.com/docs/authorization#creating-policies)
