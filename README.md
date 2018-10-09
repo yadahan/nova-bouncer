@@ -117,12 +117,9 @@ You may generate a policy using the `make:policy` artisan command:
 
 ### Registering Policies
 
-Once the policy exists, it needs to be registered:
+Once the policy exists, it needs to be registered in `app/Providers/AuthServiceProvider.php` file:
 
 ```php
-// in app/Providers/AuthServiceProvider.php
-
-// ...
 protected $policies = [
     // ...
     'App\User' => 'App\Policies\UserPolicy',
