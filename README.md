@@ -14,7 +14,7 @@ Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your 
 
 You may use Composer to install Nova Bouncer into your Laravel project:
 
-    composer require yadahan/nova-bouncer dev-master
+    composer require yadahan/nova-bouncer
 
 ### Configuration
 
