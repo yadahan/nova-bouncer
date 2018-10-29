@@ -16,7 +16,7 @@
     "require": {
         "php": "^7.1.3",
         "laravel/nova": "*",
-        "silber/bouncer": "dev-master"
+        "silber/bouncer": "^v1.0.0-rc.4"
     },
     "autoload": {
         "psr-4": {
