@@ -53,7 +53,7 @@ class Ability extends Resource
     {
         static::$model = $model;
     }
-    
+
     /**
      * Get the fields displayed by the resource.
      *
