@@ -4,6 +4,7 @@ namespace Yadahan\BouncerTool;
 
 use Laravel\Nova\Nova;
 use Silber\Bouncer\Database\Role;
+use Silber\Bouncer\Database\Models;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Events\ServingNova;
 use Silber\Bouncer\Database\Ability;
@@ -28,6 +29,7 @@ class BouncerToolServiceProvider extends ServiceProvider
 
         $this->app->booted(function () {
             $this->routes();
+            $this->setModels();
         });
 
         Nova::serving(function (ServingNova $event) {
@@ -60,7 +62,6 @@ class BouncerToolServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
@@ -72,5 +73,12 @@ class BouncerToolServiceProvider extends ServiceProvider
     {
         Gate::policy(Role::class, RolePolicy::class);
         Gate::policy(Ability::class, AbilityPolicy::class);
+    }
+
+    /** Set ability and role model based on Bouncer intialization */
+    protected function setModels()
+    {
+        \Yadahan\BouncerTool\Nova\Ability::setModel(Models::classname(Ability::class));
+        \Yadahan\BouncerTool\Nova\Role::setModel(Models::classname(Role::class));
     }
 }

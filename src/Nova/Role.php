@@ -41,6 +41,17 @@ class Role extends Resource
     public static $displayInNavigation = false;
 
     /**
+     * Set the model to be used for roles.
+     *
+     * @param  string  $model
+     * @return void
+     */
+    public static function setModel($model)
+    {
+        static::$model = $model;
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request  $request
