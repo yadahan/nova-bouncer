@@ -4,8 +4,8 @@ namespace Yadahan\BouncerTool;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
-use Yadahan\BouncerTool\Nova\Role;
 use Yadahan\BouncerTool\Nova\Ability;
+use Yadahan\BouncerTool\Nova\Role;
 
 class BouncerTool extends Tool
 {

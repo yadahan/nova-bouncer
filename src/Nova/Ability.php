@@ -2,14 +2,14 @@
 
 namespace Yadahan\BouncerTool\Nova;
 
-use Laravel\Nova\Resource;
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Code;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphedByMany;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Resource;
 
 class Ability extends Resource
 {

@@ -2,15 +2,15 @@
 
 namespace Yadahan\BouncerTool;
 
-use Laravel\Nova\Nova;
-use Silber\Bouncer\Database\Role;
-use Silber\Bouncer\Database\Models;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Events\ServingNova;
-use Silber\Bouncer\Database\Ability;
 use Illuminate\Support\ServiceProvider;
-use Yadahan\BouncerTool\Policies\RolePolicy;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
+use Silber\Bouncer\Database\Ability;
+use Silber\Bouncer\Database\Models;
+use Silber\Bouncer\Database\Role;
 use Yadahan\BouncerTool\Policies\AbilityPolicy;
+use Yadahan\BouncerTool\Policies\RolePolicy;
 
 class BouncerToolServiceProvider extends ServiceProvider
 {
