@@ -17,7 +17,7 @@ class Action extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('name', $value);
+        return $value ? $query->where('name', $value) : $query;
     }
 
     /**
