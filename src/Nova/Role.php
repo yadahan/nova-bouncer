@@ -70,10 +70,6 @@ class Role extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Level')
-                ->sortable()
-                ->rules('nullable', 'integer'),
-
             Text::make('Scope')
                 ->sortable()
                 ->rules('nullable', 'integer'),
