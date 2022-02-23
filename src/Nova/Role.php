@@ -62,11 +62,11 @@ class Role extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Title')
+            Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Name')
+            Text::make('Title')
                 ->sortable()
                 ->rules('required', 'max:255'),
 

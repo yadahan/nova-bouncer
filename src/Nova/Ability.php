@@ -65,14 +65,14 @@ class Ability extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Title')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
             Select::make('Name')
                 ->sortable()
                 ->options(config('bouncer-tool.actions'))
                 ->displayUsingLabels(),
+
+            Text::make('Title')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
             Select::make('Entity Type')
                 ->options(config('bouncer-tool.entities'))

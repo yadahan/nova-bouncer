@@ -33,8 +33,8 @@ public function tools()
 Next, add the Roles and Abilities `MorphToMany` fields to your User resource in `app/Nova/User.php` file:
 
 ```php
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Fields\Text;
 
 public function fields(Request $request)
 {
@@ -114,17 +114,6 @@ $user->assign('manage-bouncer');
 You may generate a policy using the `make:policy` artisan command:
 
     php artisan make:policy UserPolicy --model=User
-
-### Registering Policies
-
-Once the policy exists, it needs to be registered in `app/Providers/AuthServiceProvider.php` file:
-
-```php
-protected $policies = [
-    // ...
-    'App\User' => 'App\Policies\UserPolicy',
-];
-```
 
 ## Contributing
 

@@ -14,7 +14,7 @@ return [
 
     'entities' => [
         '*' => 'Everything',
-        'App\User' => 'User',
+        'App\Models\User' => 'User',
         'Silber\Bouncer\Database\Role' => 'Role',
         'Silber\Bouncer\Database\Ability' => 'Ability',
     ],
