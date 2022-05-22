@@ -25,7 +25,7 @@ public function tools()
 {
     return [
         // ...
-        new \Yadahan\BouncerTool\BouncerTool(),
+        new \Yadahan\BouncerTool\BouncerTool,
     ];
 }
 ```
@@ -61,30 +61,32 @@ Finally, publish the Nova Bouncer config using the `vendor:publish` Artisan comm
 After publishing the config, you may define the models and abilities that you want to manage, in `config/bouncer-tool.php` file:
 
 ```php
-'entities' => [
-    '*' => 'Everything',
-    'App\User' => 'User',
+'actions' => [
+    '*' => __('Manage'),
+    'viewAny' => __('View Any'),
+    'view' => __('View'),
+    'create' => __('Create'),
+    'update' => __('Update'),
+    'replicate' => __('Replicate'),
+    'delete' => __('Delete'),
+    'restore' => __('Restore'),
+    'forceDelete' => __('Force Delete'),
+    'runAction' => __('Run Action'),
+    'runDestructiveAction' => __('Run Destructive Action'),
 ],
 
-'actions' => [
-    '*' => 'All abilities',
-    'viewAny' => 'View any',
-    'view' => 'View',
-    'create' => 'Create',
-    'update' => 'Update',
-    'delete' => 'Delete',
-    'restore' => 'Restore',
-    'forceDelete' => 'Force delete',
+'entities' => [
+    'User' => App\Models\User::class,
 ],
 ```
 
 ### Basic Usage
 
-A new item group (Bouncer) will appear in your Nova navigation menu.
+A new section (Bouncer) will appear in your Nova navigation menu.
 
-> Only users who are authorized to manage the Bouncer models can see this navigation items.
+> Only users who are authorized to manage the Bouncer models can see this navigation section.
 
-You may give ability to manage the Bouncer models for a user\role:
+You may give ability to manage the Bouncer models for a user or role:
 
 ```php
 $user = User::find(1);
@@ -94,15 +96,12 @@ Bouncer::allow($user)->toManage(\Silber\Bouncer\Database\Ability::class);
 
 // or
 
-Bouncer::role()->create([
-    'name' => 'manage-bouncer',
-    'title' => 'Manage bouncer',
-]);
+$role = Bouncer::role()->create(['name' => 'manage-bouncer']);
 
-Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Role::class);
-Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Ability::class);
+Bouncer::allow($role)->toManage(\Silber\Bouncer\Database\Role::class);
+Bouncer::allow($role)->toManage(\Silber\Bouncer\Database\Ability::class);
 
-$user->assign('manage-bouncer');
+$user->assign($role);
 ```
 
 ## Laravel Authorization
@@ -121,4 +120,4 @@ Thank you for considering contributing to the Nova Bouncer.
 
 ## License
 
-Nova Bouncer is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Nova Bouncer is open-sourced software licensed under the [MIT license](LICENSE.md).

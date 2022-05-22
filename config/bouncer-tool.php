@@ -4,23 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Entities
-    |--------------------------------------------------------------------------
-    |
-    | The entities that are displayed in the Entity Type field in the Ability
-    | resource.
-    |
-    */
-
-    'entities' => [
-        '*' => 'Everything',
-        'App\Models\User' => 'User',
-        'Silber\Bouncer\Database\Role' => 'Role',
-        'Silber\Bouncer\Database\Ability' => 'Ability',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Actions
     |--------------------------------------------------------------------------
     |
@@ -30,14 +13,33 @@ return [
     */
 
     'actions' => [
-        '*' => 'All abilities',
-        'viewAny' => 'View any',
-        'view' => 'View',
-        'create' => 'Create',
-        'update' => 'Update',
-        'delete' => 'Delete',
-        'restore' => 'Restore',
-        'forceDelete' => 'Force delete',
+        '*' => __('Manage'),
+        'viewAny' => __('View Any'),
+        'view' => __('View'),
+        'create' => __('Create'),
+        'update' => __('Update'),
+        'replicate' => __('Replicate'),
+        'delete' => __('Delete'),
+        'restore' => __('Restore'),
+        'forceDelete' => __('Force Delete'),
+        'runAction' => __('Run Action'),
+        'runDestructiveAction' => __('Run Destructive Action'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Entities
+    |--------------------------------------------------------------------------
+    |
+    | The entities that are displayed in the Entity Type field in the Ability
+    | resource.
+    |
+    */
+
+    'entities' => [
+        'User' => App\Models\User::class,
+        'Role' => Silber\Bouncer\Database\Role::class,
+        'Ability' => Silber\Bouncer\Database\Ability::class,
     ],
 
 ];

@@ -4,8 +4,6 @@ namespace Yadahan\BouncerTool;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Events\ServingNova;
-use Laravel\Nova\Nova;
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\Models;
 use Silber\Bouncer\Database\Role;
@@ -21,19 +19,12 @@ class BouncerToolServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
-
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'bouncer-tool');
-
         $this->mergeConfigFrom(__DIR__.'/../config/bouncer-tool.php', 'bouncer-tool');
 
         $this->app->booted(function () {
+            $this->policies();
             $this->routes();
-            $this->setModels();
-        });
-
-        Nova::serving(function (ServingNova $event) {
-            //
+            $this->models();
         });
 
         if ($this->app->runningInConsole()) {
@@ -41,6 +32,17 @@ class BouncerToolServiceProvider extends ServiceProvider
                 __DIR__.'/../config/bouncer-tool.php' => config_path('bouncer-tool.php'),
             ], 'bouncer-tool-config');
         }
+    }
+
+    /**
+     * Register the tool's policies.
+     *
+     * @return void
+     */
+    protected function policies()
+    {
+        Gate::policy(Role::class, RolePolicy::class);
+        Gate::policy(Ability::class, AbilityPolicy::class);
     }
 
     /**
@@ -56,29 +58,23 @@ class BouncerToolServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the tool's models.
+     *
+     * @return void
+     */
+    protected function models()
+    {
+        Nova\Ability::setModel(Models::classname(Ability::class));
+        Nova\Role::setModel(Models::classname(Role::class));
+    }
+
+    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-    }
-
-    /**
-     * Register the Bouncer's policies.
-     *
-     * @return void
-     */
-    protected function registerPolicies()
-    {
-        Gate::policy(Role::class, RolePolicy::class);
-        Gate::policy(Ability::class, AbilityPolicy::class);
-    }
-
-    /** Set ability and role model based on Bouncer intialization */
-    protected function setModels()
-    {
-        \Yadahan\BouncerTool\Nova\Ability::setModel(Models::classname(Ability::class));
-        \Yadahan\BouncerTool\Nova\Role::setModel(Models::classname(Role::class));
+        //
     }
 }

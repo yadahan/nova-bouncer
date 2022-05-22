@@ -5,7 +5,7 @@ namespace Yadahan\BouncerTool\Nova\Filters;
 use Laravel\Nova\Filters\Filter;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Action extends Filter
+class Entity extends Filter
 {
     /**
      * The filter's component.
@@ -24,7 +24,7 @@ class Action extends Filter
      */
     public function apply(NovaRequest $request, $query, $value)
     {
-        return $query->where('name', $value);
+        return $query->where('entity_type', $value);
     }
 
     /**
@@ -35,6 +35,10 @@ class Action extends Filter
      */
     public function options(NovaRequest $request)
     {
-        return array_flip(config('bouncer-tool.actions'));
+        return collect(config('bouncer-tool.entities'))->map(function ($entity, $key) {
+            $class = new $entity;
+
+            return $class->getMorphClass();
+        })->prepend('*', 'Everything')->toArray();
     }
 }

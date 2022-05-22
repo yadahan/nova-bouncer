@@ -2,16 +2,18 @@
 
 namespace Yadahan\BouncerTool;
 
+use Illuminate\Http\Request;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
-use Yadahan\BouncerTool\Nova\Ability;
-use Yadahan\BouncerTool\Nova\Role;
 
 class BouncerTool extends Tool
 {
-    public $roleResource = Role::class;
+    public $roleResource = \Yadahan\BouncerTool\Nova\Ability::class;
 
-    public $abilityResource = Ability::class;
+    public $abilityResource = \Yadahan\BouncerTool\Nova\Role::class;
 
     /**
      * Perform any tasks that need to happen when the tool is booted.
@@ -24,16 +26,6 @@ class BouncerTool extends Tool
             $this->roleResource,
             $this->abilityResource,
         ]);
-    }
-
-    /**
-     * Build the view that renders the navigation links for the tool.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function renderNavigation()
-    {
-        return view('bouncer-tool::navigation');
     }
 
     /**
@@ -58,5 +50,27 @@ class BouncerTool extends Tool
         $this->abilityResource = $abilityResource;
 
         return $this;
+    }
+
+    /**
+     * Build the menu that renders the navigation links for the tool.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    public function menu(Request $request)
+    {
+        return MenuSection::make(__('Bouncer'), [
+            MenuItem::make($this->roleResource::label())
+                ->path('/resources/'.$this->roleResource::uriKey())
+                ->canSee(function (NovaRequest $request) {
+                    return $request->user()->can('viewAny', $this->roleResource::getModel());
+                }),
+            MenuItem::make($this->abilityResource::label())
+                ->path('/resources/'.$this->abilityResource::uriKey())
+                ->canSee(function (NovaRequest $request) {
+                    return $request->user()->can('viewAny', $this->abilityResource::getModel());
+                }),
+        ])->icon('shield-exclamation')->collapsable();
     }
 }

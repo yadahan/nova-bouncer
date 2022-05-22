@@ -3,10 +3,14 @@
 namespace Yadahan\BouncerTool\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphedByMany;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
+use Silber\Bouncer\Database\Titles\RoleTitle;
 
 class Role extends Resource
 {
@@ -15,7 +19,7 @@ class Role extends Resource
      *
      * @var string
      */
-    public static $model = 'Silber\Bouncer\Database\Role';
+    public static $model = \Silber\Bouncer\Database\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -52,39 +56,62 @@ class Role extends Resource
     }
 
     /**
+     * Get the model to be used for roles.
+     *
+     * @return void
+     */
+    public static function getModel()
+    {
+        return static::$model;
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make()
+                ->sortable()
+                ->showOnPreview(),
 
             Text::make('Name')
+                ->rules('required', 'max:255')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->showOnPreview(),
 
             Text::make('Title')
+                ->dependsOn([
+                    'name',
+                ], function (Text $field, NovaRequest $request, FormData $formData) {
+                    $field->default(RoleTitle::from(new static::$model([
+                        'name' => $formData->name,
+                    ]))->toString());
+                })
+                ->rules('max:255')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->showOnPreview(),
 
-            Text::make('Scope')
+            Number::make('Scope')
+                ->nullable()
                 ->sortable()
-                ->rules('nullable', 'integer'),
+                ->showOnPreview(),
 
-            MorphedByMany::make('Abilities')->fields(new PermissionsFields),
+            MorphedByMany::make('Abilities')
+                ->fields(new PermissionsFields),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(NovaRequest $request)
     {
         return [];
     }
@@ -92,10 +119,10 @@ class Role extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(NovaRequest $request)
     {
         return [];
     }
@@ -103,10 +130,10 @@ class Role extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(NovaRequest $request)
     {
         return [];
     }
@@ -114,11 +141,21 @@ class Role extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    /**
+     * Get the URI key for the resource.
+     *
+     * @return string
+     */
+    public static function uriKey()
+    {
+        return 'bouncer-roles';
     }
 }
