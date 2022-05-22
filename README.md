@@ -2,7 +2,7 @@
 
 [![StyleCI](https://styleci.io/repos/152144400/shield?branch=master&style=flat)](https://styleci.io/repos/152144400)
 [![Total Downloads](https://poser.pugx.org/yadahan/nova-bouncer/downloads?format=flat)](https://packagist.org/packages/yadahan/nova-bouncer)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/LICENSE.md)
 
 Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your [Nova](https://nova.laravel.com) administration panel.
 
@@ -11,6 +11,7 @@ Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your 
 ## Installation
 
 > **Note**
+> 
 > Nova Bouncer requires laravel/nova ^4.0 and silber/bouncer ^1.0.
 
 You may use Composer to install Nova Bouncer into your Laravel project:
@@ -86,6 +87,7 @@ After publishing the config, you may define the models and abilities that you wa
 A new section (Bouncer) will appear in your Nova navigation menu.
 
 > **Warning**
+> 
 > Only users who are authorized to manage the Bouncer models can see this navigation section.
 
 You may give ability to manage the Bouncer models for a user or role:
