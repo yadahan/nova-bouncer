@@ -1,20 +1,22 @@
 # Nova Bouncer
 
-[![StyleCI](https://styleci.io/repos/152144400/shield?branch=master&style=flat)](https://styleci.io/repos/152144400)
+[![StyleCI](https://styleci.io/repos/152144400/shield?branch=1.x&style=flat)](https://styleci.io/repos/152144400)
 [![Total Downloads](https://poser.pugx.org/yadahan/nova-bouncer/downloads?format=flat)](https://packagist.org/packages/yadahan/nova-bouncer)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/yadahan/nova-bouncer/1.x/LICENSE)
 
-Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your Nova application.
+Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your [Nova](https://nova.laravel.com) administration panel.
 
-![nova bouncer screenshot](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/screenshot.png)
+![nova bouncer screenshot](https://raw.githubusercontent.com/yadahan/nova-bouncer/1.x/screenshot.png)
 
 ## Installation
 
+> **Note**
+> 
 > Nova Bouncer requires silber/bouncer.
 
 You may use Composer to install Nova Bouncer into your Laravel project:
 
-    composer require yadahan/nova-bouncer
+    composer require yadahan/nova-bouncer "^1.0"
 
 ### Configuration
 
@@ -25,7 +27,7 @@ public function tools()
 {
     return [
         // ...
-        new \Yadahan\BouncerTool\BouncerTool(),
+        new \Yadahan\BouncerTool\BouncerTool,
     ];
 }
 ```
@@ -82,9 +84,11 @@ After publishing the config, you may define the models and abilities that you wa
 
 A new item group (Bouncer) will appear in your Nova navigation menu.
 
-> Only users who are authorized to manage the Bouncer models can see this navigation items.
+> **Warning**
+> 
+> Only users who are authorized to manage the Bouncer models can see this navigation section.
 
-You may give ability to manage the Bouncer models for a user\role:
+You may give ability to manage the Bouncer models for a user or role:
 
 ```php
 $user = User::find(1);
@@ -94,15 +98,12 @@ Bouncer::allow($user)->toManage(\Silber\Bouncer\Database\Ability::class);
 
 // or
 
-Bouncer::role()->create([
-    'name' => 'manage-bouncer',
-    'title' => 'Manage bouncer',
-]);
+$role = Bouncer::role()->create(['name' => 'manage-bouncer']);
 
-Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Role::class);
-Bouncer::allow('manage-bouncer')->toManage(\Silber\Bouncer\Database\Ability::class);
+Bouncer::allow($role)->toManage(\Silber\Bouncer\Database\Role::class);
+Bouncer::allow($role)->toManage(\Silber\Bouncer\Database\Ability::class);
 
-$user->assign('manage-bouncer');
+$user->assign($role);
 ```
 
 ## Laravel Authorization
@@ -121,4 +122,4 @@ Thank you for considering contributing to the Nova Bouncer.
 
 ## License
 
-Nova Bouncer is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Nova Bouncer is open-sourced software licensed under the [MIT license](LICENSE).
