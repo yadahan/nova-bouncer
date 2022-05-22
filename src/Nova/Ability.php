@@ -112,7 +112,7 @@ class Ability extends Resource
                     'name',
                     'entity_type',
                     'entity_id',
-                    'only_owned'
+                    'only_owned',
                 ], function (Text $field, NovaRequest $request, FormData $formData) {
                     $ability = new static::$model;
 
