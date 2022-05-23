@@ -6,7 +6,10 @@
 
 Use the power of [Bouncer](https://github.com/JosephSilber/bouncer) within your [Nova](https://nova.laravel.com) administration panel.
 
-![nova bouncer screenshot](https://raw.githubusercontent.com/yadahan/nova-bouncer/master/screenshot-light.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/yadahan/nova-bouncer/master/screenshot-dark.png">
+  <img alt="Nova Bouncer screenshot" src="https://raw.githubusercontent.com/yadahan/nova-bouncer/master/screenshot-light.png">
+</picture>
 
 ## Installation
 
