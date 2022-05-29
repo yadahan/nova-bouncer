@@ -67,17 +67,17 @@ After publishing the config, you may define the models and abilities that you wa
 
 ```php
 'actions' => [
-    '*' => __('Manage'),
-    'viewAny' => __('View Any'),
-    'view' => __('View'),
-    'create' => __('Create'),
-    'update' => __('Update'),
-    'replicate' => __('Replicate'),
-    'delete' => __('Delete'),
-    'restore' => __('Restore'),
-    'forceDelete' => __('Force Delete'),
-    'runAction' => __('Run Action'),
-    'runDestructiveAction' => __('Run Destructive Action'),
+    '*' => 'Manage',
+    'viewAny' => 'View Any',
+    'view' => 'View',
+    'create' => 'Create',
+    'update' => 'Update',
+    'replicate' => 'Replicate',
+    'delete' => 'Delete',
+    'restore' => 'Restore',
+    'forceDelete' => 'Force Delete',
+    'runAction' => 'Run Action',
+    'runDestructiveAction' => 'Run Destructive Action',
 ],
 
 'entities' => [
