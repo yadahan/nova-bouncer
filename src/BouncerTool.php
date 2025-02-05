@@ -11,9 +11,9 @@ use Laravel\Nova\Tool;
 
 class BouncerTool extends Tool
 {
-    public $roleResource = \Yadahan\BouncerTool\Nova\Ability::class;
+    public $abilityResource = \Yadahan\BouncerTool\Nova\Ability::class;
 
-    public $abilityResource = \Yadahan\BouncerTool\Nova\Role::class;
+    public $roleResource = \Yadahan\BouncerTool\Nova\Role::class;
 
     /**
      * Perform any tasks that need to happen when the tool is booted.
