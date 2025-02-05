@@ -11,6 +11,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 use Silber\Bouncer\Database\Titles\RoleTitle;
+use Silber\Bouncer\Database\Models as BouncerModels;
 
 class Role extends Resource
 {
@@ -102,6 +103,8 @@ class Role extends Resource
 
             MorphedByMany::make('Abilities')
                 ->fields(new PermissionsFields),
+
+            ...(Nova::resourceForModel(BouncerModels::classname('App\User')) ? [HasMany::make('Users')] : []),
         ];
     }
 
