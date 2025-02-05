@@ -4,15 +4,15 @@ namespace Yadahan\BouncerTool\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\FormData;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphedByMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
-use Silber\Bouncer\Database\Titles\RoleTitle;
 use Silber\Bouncer\Database\Models as BouncerModels;
+use Silber\Bouncer\Database\Titles\RoleTitle;
 
 class Role extends Resource
 {
